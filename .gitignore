@@ -3,3 +3,8 @@
 ################################################################################
 
 /00.MvcApp.Core/bin/Debug
+/00.MvcApp.Core/obj/Debug
+/99.MvcApp.Web.Main/obj/Debug
+/packages
+/Tests/MvcApp.UnitTests/obj/Debug
+/.vs
