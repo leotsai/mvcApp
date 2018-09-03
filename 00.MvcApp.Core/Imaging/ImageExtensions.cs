@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -21,7 +22,13 @@ namespace MvcApp.Core.Imaging
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
             g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-            g.DrawImage(image, 0, 0, newSize.Width, newSize.Height);
+
+            var r = Math.Min(image.Width * 1F / newSize.Width, image.Height * 1F / newSize.Height);
+            var rSize = new Size((int)Math.Round(newSize.Width * r), (int)Math.Round(newSize.Height * r));
+
+            var destRectangle = new Rectangle(0, 0, newSize.Width, newSize.Height);
+            var srcRectangle = new Rectangle((image.Width - rSize.Width) / 2, (image.Height - rSize.Height) / 2, rSize.Width, rSize.Height);
+            g.DrawImage(image, destRectangle, srcRectangle, GraphicsUnit.Pixel);
             g.Dispose();
             return bitmap;
         }
@@ -30,7 +37,7 @@ namespace MvcApp.Core.Imaging
         {
             image.Save(path, Path.GetExtension(path).GetImageFormat());
         }
-        
+
         public static void SaveToFileInQuality(this Image image, string path, ImageFormat format)
         {
             var parameters = new EncoderParameters();
