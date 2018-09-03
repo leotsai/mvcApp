@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9AB20B00-A7CB-4BC9-A285-C25DED17A1C5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MvcApp.Core</RootNamespace>
+    <AssemblyName>00.MvcApp.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\_libs\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Gma.QrCodeNet.Encoding, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gma.QrCodeNet.0.4.1.2\lib\net40\Gma.QrCodeNet.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\_libs\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\_libs\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\_libs\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\_libs\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\_libs\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Unity.Abstractions">
+      <HintPath>..\_libs\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container">
+      <HintPath>..\_libs\Unity.Container.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppContext.cs" />
+    <Compile Include="Extensions\AssemblyExtensions.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\DataRowExtensions.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\DecimalExtentions.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\ExceptionExtension.cs" />
+    <Compile Include="Extensions\NullableExtensions.cs" />
+    <Compile Include="Extensions\RouteCollectionExtensions.cs" />
+    <Compile Include="Extensions\SqlBulkCopyExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Extensions\UriExtensions.cs" />
+    <Compile Include="Helpers\HttpHelper.cs" />
+    <Compile Include="Helpers\IoHelper.cs" />
+    <Compile Include="Helpers\KeyGenerator.cs" />
+    <Compile Include="Helpers\Qr.cs" />
+    <Compile Include="Helpers\Serializer.cs" />
+    <Compile Include="Helpers\SqlHelper.cs" />
+    <Compile Include="Imaging\Base64Image.cs" />
+    <Compile Include="Imaging\Base64ImageBinder.cs" />
+    <Compile Include="Imaging\ImageExtensions.cs" />
+    <Compile Include="Imaging\ImageFormatExtensions.cs" />
+    <Compile Include="Imaging\SizeExtensions.cs" />
+    <Compile Include="Ioc.cs" />
+    <Compile Include="Logging\FileLogAppender.cs" />
+    <Compile Include="Logging\ILogAppender.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Logging\LogAppenderBase.cs" />
+    <Compile Include="Logging\LogArea.cs" />
+    <Compile Include="Logging\LogItem.cs" />
+    <Compile Include="NPOI\ColumnBuilder.cs" />
+    <Compile Include="NPOI\ColumnFactory.cs" />
+    <Compile Include="NPOI\ExcelReader.cs" />
+    <Compile Include="NPOI\ExcelReporter.cs" />
+    <Compile Include="Paging\ISqlParameters.cs" />
+    <Compile Include="Paging\OrderByExpression.cs" />
+    <Compile Include="Paging\PageRequest.cs" />
+    <Compile Include="Paging\PageResult.cs" />
+    <Compile Include="Paging\PagingExtension.cs" />
+    <Compile Include="Paging\SortDirection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helpers\CryptoHelper.cs" />
+    <Compile Include="_\DisposableBase.cs" />
+    <Compile Include="_\IApiResult.cs" />
+    <Compile Include="_\IQueryEntity.cs" />
+    <Compile Include="_\IRankEntity.cs" />
+    <Compile Include="_\ITreeNodeEntity.cs" />
+    <Compile Include="_\KnownException.cs" />
+    <Compile Include="_\ISimpleEntity.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Web\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
