@@ -10,7 +10,7 @@ namespace MvcApp.Core.NPOI
 {
     public class ExcelReader
     {
-        public static List<T> Read<T>(string fileName, string sheetName, bool isFirstRowColumnName, Func<string[], T> rowBuilder) where T : class
+        public static List<T> Read<T>(string fileName, string sheetName, bool isFirstRowColumnName, Func<int, string[], T> rowBuilder) where T : class
         {
             var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
             var list = Read(fs, Path.GetExtension(fileName) == ".xlsx", workbook =>
@@ -26,7 +26,7 @@ namespace MvcApp.Core.NPOI
             return list;
         }
 
-        public static List<T> Read<T>(string fileName, int sheetIndex, bool isFirstRowColumnName, Func<string[], T> rowBuilder) where T : class
+        public static List<T> Read<T>(string fileName, int sheetIndex, bool isFirstRowColumnName, Func<int, string[], T> rowBuilder) where T : class
         {
             var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
             var list = Read(fs, Path.GetExtension(fileName) == ".xlsx", workbook =>
@@ -42,7 +42,7 @@ namespace MvcApp.Core.NPOI
             return list;
         }
 
-        public static List<T> Read<T>(HttpPostedFileBase file, int sheetIndex, bool isFirstRowColumnName, Func<string[], T> rowBuilder) where T : class
+        public static List<T> Read<T>(HttpPostedFileBase file, int sheetIndex, bool isFirstRowColumnName, Func<int, string[], T> rowBuilder) where T : class
         {
             return Read(file.InputStream, Path.GetExtension(file.FileName) == ".xlsx", workbook =>
             {
@@ -57,7 +57,7 @@ namespace MvcApp.Core.NPOI
 
         #region private
 
-        private static List<T> Read<T>(Stream fs, bool is2007, Func<IWorkbook, ISheet> getSheet, bool isFirstRowColumnName, Func<string[], T> rowBuilder) where T : class
+        private static List<T> Read<T>(Stream fs, bool is2007, Func<IWorkbook, ISheet> getSheet, bool isFirstRowColumnName, Func<int, string[], T> rowBuilder) where T : class
         {
             IWorkbook workbook = null;
             if (is2007)
@@ -84,7 +84,7 @@ namespace MvcApp.Core.NPOI
             for (var rowIndex = startRowIndex; rowIndex <= rowCount; rowIndex++)
             {
                 var row = sheet.GetRow(rowIndex);
-                if (row == null)
+                if (row == null || row.FirstCellNum < 0)
                 {
                     list.Add(null);
                     continue;
@@ -96,7 +96,7 @@ namespace MvcApp.Core.NPOI
                     var value = row.GetCell(columnIndex);
                     values[columnIndex] = value == null ? null : value.ToString();
                 }
-                var item = rowBuilder(values);
+                var item = rowBuilder(rowIndex, values);
                 list.Add(item);
             }
             fs.Close();
